@@ -1,6 +1,6 @@
 package com.vinisolon.orders.resources;
 
-import com.vinisolon.orders.domain.User;
+import com.vinisolon.orders.entities.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

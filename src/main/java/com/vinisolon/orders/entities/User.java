@@ -1,4 +1,4 @@
-package com.vinisolon.orders.domain;
+package com.vinisolon.orders.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 // Lombok
@@ -20,6 +21,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(of = "id")
 // JPA
 @Entity
+@Table(name = "users")
 public class User implements Serializable {
 
     private static final long serialVersionUID = -2244715368275881723L;
