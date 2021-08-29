@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service // Registro para injeção de dependência em UserResource
 public class OrderService {
 
     @Autowired
@@ -19,8 +19,8 @@ public class OrderService {
     }
 
     public Order findById(Long id) {
-        Optional<Order> order = repository.findById(id);
-        return order.get();
+        Optional<Order> obj = repository.findById(id);
+        return obj.get();
     }
 
 }

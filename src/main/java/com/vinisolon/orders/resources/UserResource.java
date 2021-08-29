@@ -20,14 +20,14 @@ public class UserResource {
 
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
-        List<User> users = service.findAll();
-        return ResponseEntity.ok().body(users);
+        List<User> list = service.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) {
-        User user = service.findById(id);
-        return ResponseEntity.ok().body(user);
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj);
     }
 
 }
