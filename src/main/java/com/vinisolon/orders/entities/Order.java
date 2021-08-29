@@ -1,7 +1,7 @@
 package com.vinisolon.orders.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
+import com.vinisolon.orders.entities.enums.OrderStatus;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +21,6 @@ import java.time.Instant;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 // JPA
 @Entity
@@ -35,9 +34,26 @@ public class Order implements Serializable {
     private Long id;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
+    private Integer orderStatus;
 
     @ManyToOne
     @JoinColumn(name = "fk_client_id") // Chave estrangeira de users na tabela orders
     private User client;
+
+    public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
+        this.id = id;
+        this.moment = moment;
+        setOrderStatus(orderStatus);
+        this.client = client;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOf(orderStatus);
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if (orderStatus != null)
+            this.orderStatus = orderStatus.getCode();
+    }
 
 }
