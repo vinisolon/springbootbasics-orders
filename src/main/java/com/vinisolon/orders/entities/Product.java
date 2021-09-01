@@ -10,9 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,7 +39,10 @@ public class Product implements Serializable {
     private String imgUrl;
 
     @ManyToMany
-    @Transient
+    @JoinTable(name = "products_x_categories",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
     @Setter(AccessLevel.NONE) // Usar somente getters em coleções
     private Set<Category> categories = new HashSet<>();
 

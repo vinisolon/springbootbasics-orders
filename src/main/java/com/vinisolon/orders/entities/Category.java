@@ -1,5 +1,6 @@
 package com.vinisolon.orders.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -34,8 +35,8 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
-    @ManyToMany
-    @Transient
+    @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
     @Setter(AccessLevel.NONE) // Usar somente getters em coleções
     private Set<Product> products = new HashSet<>();
 
