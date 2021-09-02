@@ -1,5 +1,6 @@
 package com.vinisolon.orders.entities.pk;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vinisolon.orders.entities.Order;
 import com.vinisolon.orders.entities.Product;
 import lombok.EqualsAndHashCode;
@@ -24,6 +25,7 @@ public class OrderItemPK implements Serializable {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;

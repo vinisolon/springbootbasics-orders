@@ -1,9 +1,11 @@
 package com.vinisolon.orders.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vinisolon.orders.entities.pk.OrderItemPK;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.EmbeddedId;
@@ -14,6 +16,7 @@ import java.io.Serializable;
 // Lombok
 @Getter
 @Setter
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 // JPA
 @Entity
@@ -25,7 +28,7 @@ public class OrderItem implements Serializable {
     @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
     @EmbeddedId // Anotação para id de chave composta
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK(); // Sempre que utilizar classe auxiliar de pk composta, será necessário instancia-la
 
     private Integer quantity;
     private Double price;
@@ -39,6 +42,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore // Para evitar acesso de mão dupla e causar loop infinito na requisição
     public Order getOrder() {
         return id.getOrder();
     }

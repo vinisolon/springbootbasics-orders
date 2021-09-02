@@ -1,7 +1,9 @@
 package com.vinisolon.orders.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vinisolon.orders.entities.enums.OrderStatus;
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +15,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 // Lombok
 @Getter
@@ -39,6 +44,10 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "fk_client_id") // Chave estrangeira de users na tabela orders
     private User client;
+
+    @OneToMany(mappedBy = "id.order") // O id chave composta que possui o Order
+    @Setter(AccessLevel.NONE)
+    private Set<OrderItem> itens = new HashSet<>();
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
