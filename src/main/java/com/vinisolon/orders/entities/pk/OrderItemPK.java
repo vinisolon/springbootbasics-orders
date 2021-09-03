@@ -1,6 +1,5 @@
 package com.vinisolon.orders.entities.pk;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vinisolon.orders.entities.Order;
 import com.vinisolon.orders.entities.Product;
 import lombok.EqualsAndHashCode;

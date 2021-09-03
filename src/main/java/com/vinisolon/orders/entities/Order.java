@@ -1,7 +1,6 @@
 package com.vinisolon.orders.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vinisolon.orders.entities.enums.OrderStatus;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
