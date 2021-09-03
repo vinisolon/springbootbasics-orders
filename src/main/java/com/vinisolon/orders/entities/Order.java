@@ -31,7 +31,7 @@ import java.util.Set;
 @Table(name = "orders")
 public class Order implements Serializable {
 
-    private static final long serialVersionUID = -336731948962553495L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

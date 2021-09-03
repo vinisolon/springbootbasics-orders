@@ -28,7 +28,7 @@ import java.util.Set;
 @Table(name = "categories")
 public class Category implements Serializable {
 
-    private static final long serialVersionUID = 1854944037388756140L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
