@@ -3,6 +3,7 @@ package com.vinisolon.orders.config;
 import com.vinisolon.orders.entities.Category;
 import com.vinisolon.orders.entities.Order;
 import com.vinisolon.orders.entities.OrderItem;
+import com.vinisolon.orders.entities.Payment;
 import com.vinisolon.orders.entities.Product;
 import com.vinisolon.orders.entities.User;
 import com.vinisolon.orders.entities.enums.OrderStatus;
@@ -79,6 +80,13 @@ public class TestConfig implements CommandLineRunner {
         OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+        Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+
+        // Para salvar um objeto dependente em uma relação 1 para 1, não será chamado o repository do dependente.
+        // O dado só existe no banco quando é incluso no Objeto principal.
+        o1.setPayment(pay1);
+        orderRepository.save(o1);
 
     }
 
