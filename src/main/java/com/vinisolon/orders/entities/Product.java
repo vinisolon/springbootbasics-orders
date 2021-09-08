@@ -1,5 +1,6 @@
 package com.vinisolon.orders.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -46,12 +48,25 @@ public class Product implements Serializable {
     @Setter(AccessLevel.NONE) // Usar somente getters em coleções
     private Set<Category> categories = new HashSet<>();
 
+    @OneToMany(mappedBy = "id.product") // O id chave composta que possui o Product
+    @Setter(AccessLevel.NONE) // Usar somente getters em coleções
+    @Getter(AccessLevel.NONE) // Método get personalizado
+    private Set<OrderItem> itens = new HashSet<>();
+
     public Product(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
+    }
+
+    @JsonIgnore // Para evitar acesso de mão dupla e causar loop infinito na requisição
+    public Set<Order> getOrders() {
+        Set<Order> orders = new HashSet<>();
+        for (OrderItem item : itens)
+            orders.add(item.getOrder());
+        return orders;
     }
 
 }
