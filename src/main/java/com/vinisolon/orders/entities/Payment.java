@@ -1,5 +1,6 @@
 package com.vinisolon.orders.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -37,6 +38,7 @@ public class Payment implements Serializable {
     // Classe dependente, pois o order não necessáriamente tem um pagamento
     @OneToOne
     @MapsId
+    @JsonIgnore
     private Order order;
 
 }
