@@ -4,6 +4,7 @@ import com.vinisolon.orders.entities.User;
 import com.vinisolon.orders.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +42,13 @@ public class UserResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         // O método created espera um cabeçalho do tipo location contendo o endereço do novo recurso inserido, a URI
         return ResponseEntity.created(uri).body(obj);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        // Resposta sem corpo (void). O noContent retorna uma resposta vazia com código HTTP 204
+        return ResponseEntity.noContent().build();
     }
 
 }
